@@ -32,7 +32,7 @@ public class ChatFrame extends JFrame
         this.userName = userName;
         this.os = os;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(2000, 800);
+        setSize(1600, 800);
 
         os.writeObject(userName);
         os.reset();
