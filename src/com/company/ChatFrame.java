@@ -32,7 +32,7 @@ public class ChatFrame extends JFrame
         this.userName = userName;
         this.os = os;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1800, 800);
+        setSize(2000, 800);
 
         os.writeObject(userName);
         os.reset();
@@ -43,21 +43,21 @@ public class ChatFrame extends JFrame
 
         list_users.setListData(users.toArray());
         list_users.setEnabled(false);
-        lbl_users.setBounds(640, 30, 130, 20);
-        list_users.setBounds(640, 50, 130, 550);
+        lbl_users.setBounds(340, 30, 130, 20);
+        list_users.setBounds(340, 50, 130, 550);
 
 
         scr_chatBox = new JScrollPane(txt_chatBox, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scr_chatBox.setBounds(20, 50, 600, 550);
+        scr_chatBox.setBounds(20, 50, 300, 550);
         lbl_chatBox.setBounds(20, 30, 100, 20);
         txt_chatBox.setEditable(false);
 
-        txt_message.setBounds(20, 650, 600, 80);
+        txt_message.setBounds(20, 650, 300, 80);
         lbl_message.setBounds(20, 630, 100, 20);
 
-        btn_send.setBounds(640, 650, 130, 30);
-        btn_exit.setBounds(640, 700, 130, 30);
-        p.setBounds(800,0,1000,800);
+        btn_send.setBounds(340, 650, 130, 30);
+        btn_exit.setBounds(340, 700, 130, 30);
+        p.setBounds(800,0,900,600);
         setLayout(null);
         add(txt_message);
         add(lbl_message);
@@ -177,12 +177,12 @@ public class ChatFrame extends JFrame
             }
         }
         list_users.setListData(users.toArray());
-        repaint();
+        repaint(0,0,300,550);
     }
 
     public void update(String message)
     {
         txt_chatBox.append(message);
-        repaint();
+        repaint(0,0,300,550);
     }
 }
