@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener, KeyListener{
     Color c = new Color((int)(Math.random() * 0x1000000));
-    RainDrop[] drop = new RainDrop[400];
+    RainDrop[] drop = new RainDrop[1];
     int x;
     int y;
     int x1;
@@ -20,7 +20,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
     boolean f = true;
     public Panel(){
         super();
-        setSize(1920,1080);
+        setSize(1000,800);
         addMouseMotionListener(this);
         addMouseListener(this);
         for (int i = 0; i < drop.length; i++) {

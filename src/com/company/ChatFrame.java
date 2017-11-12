@@ -32,7 +32,7 @@ public class ChatFrame extends JFrame
         this.userName = userName;
         this.os = os;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(2000, 800);
+        setSize(1800, 800);
 
         os.writeObject(userName);
         os.reset();
@@ -57,7 +57,7 @@ public class ChatFrame extends JFrame
 
         btn_send.setBounds(640, 650, 130, 30);
         btn_exit.setBounds(640, 700, 130, 30);
-        p.setBounds(800,0,900,600);
+        p.setBounds(800,0,1000,800);
         setLayout(null);
         add(txt_message);
         add(lbl_message);
