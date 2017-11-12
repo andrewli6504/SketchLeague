@@ -57,7 +57,7 @@ public class ChatFrame extends JFrame
 
         btn_send.setBounds(340, 650, 130, 30);
         btn_exit.setBounds(340, 700, 130, 30);
-        p.setBounds(800,0,900,600);
+        p.setBounds(600,0,1000,900);
         setLayout(null);
         add(txt_message);
         add(lbl_message);

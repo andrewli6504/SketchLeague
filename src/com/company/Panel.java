@@ -20,7 +20,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
     boolean f = true;
     public Panel(){
         super();
-        setSize(1000,800);
+        setSize(1000,900);
         addMouseMotionListener(this);
         addMouseListener(this);
         for (int i = 0; i < drop.length; i++) {
