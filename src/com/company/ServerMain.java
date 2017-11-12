@@ -12,7 +12,7 @@ public class ServerMain
     {
         try
         {
-            ServerSocket serverSocket = new ServerSocket(8000);
+            ServerSocket serverSocket = new ServerSocket(2022);
 
             while(true)
             {

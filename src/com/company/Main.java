@@ -28,7 +28,7 @@ public class Main
 
         try
         {
-            Socket socket = new Socket(ip, 8000);
+            Socket socket = new Socket(ip, 2022);
             System.out.println("Connected to Server!");
 
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
