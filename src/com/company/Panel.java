@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.awt.event.KeyListener;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener, KeyListener{
-    Color c = new Color((int)(Math.random() * 0x1000000));
+    Color c = Color.black;
     RainDrop[] drop = new RainDrop[1];
     int x;
     int y;
@@ -66,6 +66,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
         return g;
     }
 
+    public void setC(Color color){c = color;}
+
     public void addNotify()
     {
         super.addNotify();
@@ -96,16 +98,16 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
 
     @Override
     public void mousePressed(MouseEvent e) {
-        c = new Color((int)(Math.random() * 0x1000000));
+        //c = new Color((int)(Math.random() * 0x1000000));
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         // clear
-        if (e.getButton() == MouseEvent.BUTTON3){
-            f=true;
-            repaint();
-        }
+        //if (e.getButton() == MouseEvent.BUTTON3){
+        //    f=true;
+        //    repaint();
+        //}
 
 
     }
