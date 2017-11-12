@@ -14,6 +14,7 @@ public class Main
 
     public static void main(String[] args)
     {
+
         Scanner key = new Scanner(System.in);
         System.out.print("Enter the ip address: ");
         String ip = key.next();
@@ -38,6 +39,7 @@ public class Main
             ClientsListener cl = new ClientsListener(os, is, f);
             Thread t = new Thread(cl);
             t.start();
+            //Frame d = new Frame("Draw",1920,1080);
         }
         catch(Exception e)
         {

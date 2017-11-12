@@ -23,7 +23,7 @@ public class ChatFrame extends JFrame
 
     private String userName = "";
     private ArrayList<String> users = new ArrayList<String>();
-
+    private Panel p = new Panel();
     private ObjectOutputStream os;
 
     public ChatFrame(String userName, ObjectOutputStream os) throws Exception
@@ -32,7 +32,7 @@ public class ChatFrame extends JFrame
         this.userName = userName;
         this.os = os;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 800);
+        setSize(2000, 800);
 
         os.writeObject(userName);
         os.reset();
@@ -57,7 +57,7 @@ public class ChatFrame extends JFrame
 
         btn_send.setBounds(640, 650, 130, 30);
         btn_exit.setBounds(640, 700, 130, 30);
-
+        p.setBounds(800,0,900,600);
         setLayout(null);
         add(txt_message);
         add(lbl_message);
@@ -109,7 +109,7 @@ public class ChatFrame extends JFrame
                 }
             }
         });
-
+        add(p);
         setResizable(false);
         setVisible(true);
     }
