@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -32,6 +33,7 @@ public class ServersListener implements Runnable
                 String name = command.getName();
                 int n = command.getTask();
                 String mes = command.getMessage();
+                Point draw = command.getDraw();
 
                 if(n == 1)
                     users.add(name);
@@ -40,7 +42,7 @@ public class ServersListener implements Runnable
 
                 for(ObjectOutputStream tempOS : osList)
                 {
-                    commandOut = new CommandFromServer(users, mes, n);
+                    commandOut = new CommandFromServer(users, mes, n, draw);
                     tempOS.writeObject(commandOut);
                     tempOS.reset();
                 }

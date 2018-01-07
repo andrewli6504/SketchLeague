@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,11 +10,14 @@ public class CommandFromServer implements Serializable
     private String messages;
     private ArrayList<String> users;
     private int task;
+    private Point draw;
 
-    public CommandFromServer(ArrayList<String> users, String messages, int task)
+    public CommandFromServer(ArrayList<String> users, String messages, int task, Point draw)
     {
-        this.setMessages(messages);
-        this.setUsers(users);
+        this.users = users;
+        this.messages = messages;
+        this.task = task;
+        this.draw = draw;
     }
 
     public String getMessages()
@@ -34,5 +38,25 @@ public class CommandFromServer implements Serializable
     public void setUsers(ArrayList<String> users)
     {
         this.users = users;
+    }
+
+    public int getTask()
+    {
+        return task;
+    }
+
+    public void setTask(int task)
+    {
+        this.task = task;
+    }
+
+    public Point getDraw()
+    {
+        return draw;
+    }
+
+    public void setDraw(Point draw)
+    {
+        this.draw = draw;
     }
 }

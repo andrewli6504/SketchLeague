@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,18 +33,19 @@ public class ClientsListener implements Runnable
             while(true)
             {
                 command = (CommandFromServer)is.readObject();
-                ArrayList<String> users = (ArrayList<String>) is.readObject();
-                String mes = (String) is.readObject();
-                int n = (int) is.readObject();
+                ArrayList<String> users = command.getUsers();
+                String mes = command.getMessages();
+                int n = command.getTask();
+                Point draw = command.getDraw();
 
-                if(n>-2)
+                if(n > -2)
                 {
                     cp.update(mes);
                     cp.updateUsers(users, n);
                 }
                 else
                 {
-
+                    p.updateCanvas(draw);
                 }
 
             }

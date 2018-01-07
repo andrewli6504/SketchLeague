@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,15 +16,15 @@ public class CommandToServer implements Serializable
      * -2 is for drawing
      */
     private int task;
-
+    private Point draw;
     private String message;
 
-    public CommandToServer(String name, int task, String message)
+    public CommandToServer(String name, int task, String message, Point draw)
     {
         this.name = name;
         this.task = task;
         this.message = message;
-
+        this.draw = draw;
     }
 
     public String getName()
@@ -54,5 +55,15 @@ public class CommandToServer implements Serializable
     public void setMessage(String message)
     {
         this.message = message;
+    }
+
+    public Point getDraw()
+    {
+        return draw;
+    }
+
+    public void setDraw(Point draw)
+    {
+        this.draw = draw;
     }
 }
