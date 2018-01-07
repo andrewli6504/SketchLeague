@@ -9,13 +9,14 @@ import java.util.ArrayList;
 public class ChatFrame extends JFrame
 {
     private ChatPanel cp;
-    private Panel p = new Panel();
+    private Panel p;
 
     public ChatFrame(String userName, ObjectOutputStream os) throws Exception
     {
         super("Chat Client");
 
         cp = new ChatPanel(userName, os);
+        p = new Panel(os);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1600, 800);
@@ -47,5 +48,10 @@ public class ChatFrame extends JFrame
     public ChatPanel getChat()
     {
         return cp;
+    }
+
+    public Panel getDrawings()
+    {
+        return p;
     }
 }

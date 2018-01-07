@@ -1,21 +1,28 @@
 package com.company;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CommandToServer
+public class CommandToServer implements Serializable
 {
     private String name;
-    private int task;
-    private String message;
-    private BufferedImage drawing;
 
-    public CommandToServer(String name, int task, String message, BufferedImage drawing)
+    /**
+     * 1 is to add a user
+     * 0 is to remove a user
+     * -1 is to send a message
+     * -2 is for drawing
+     */
+    private int task;
+
+    private String message;
+
+    public CommandToServer(String name, int task, String message)
     {
         this.name = name;
         this.task = task;
         this.message = message;
-        this.drawing = drawing;
 
     }
 
@@ -48,15 +55,4 @@ public class CommandToServer
     {
         this.message = message;
     }
-
-    public BufferedImage getDrawing()
-    {
-        return drawing;
-    }
-
-    public void setDrawing(BufferedImage drawing)
-    {
-        this.drawing = drawing;
-    }
-
 }

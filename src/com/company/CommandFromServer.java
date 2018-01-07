@@ -1,20 +1,19 @@
 package com.company;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CommandFromServer
+public class CommandFromServer implements Serializable
 {
     private String messages;
     private ArrayList<String> users;
     private int task;
-    private BufferedImage drawing;
 
-    public CommandFromServer(ArrayList<String> users, String messages, int task, BufferedImage drawing)
+    public CommandFromServer(ArrayList<String> users, String messages, int task)
     {
         this.setMessages(messages);
         this.setUsers(users);
-        this.setDrawing(drawing);
     }
 
     public String getMessages()
@@ -35,15 +34,5 @@ public class CommandFromServer
     public void setUsers(ArrayList<String> users)
     {
         this.users = users;
-    }
-
-    public BufferedImage getDrawing()
-    {
-        return drawing;
-    }
-
-    public void setDrawing(BufferedImage drawing)
-    {
-        this.drawing = drawing;
     }
 }

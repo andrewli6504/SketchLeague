@@ -39,7 +39,6 @@ public class Main
             ClientsListener cl = new ClientsListener(os, is, f);
             Thread t = new Thread(cl);
             t.start();
-            //Frame d = new Frame("Draw",1920,1080);
         }
         catch(Exception e)
         {

@@ -56,7 +56,7 @@ public class ChatPanel extends JPanel
         this.userName = userName;
         this.os = os;
 
-        data = new CommandToServer(userName, 1, "", null);
+        data = new CommandToServer(userName, 1, "");
         os.writeObject(data);
         os.reset();
 

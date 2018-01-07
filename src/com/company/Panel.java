@@ -3,6 +3,7 @@ package com.company;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.image.BufferedImage;
@@ -18,20 +19,41 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
     int y1;
     int ct = 1;
     boolean f = true;
-    public Panel(){
+
+    private BufferedImage buffer;
+
+    private CommandToServer data = new CommandToServer("", 999,"");
+    private String userName = "";
+    private ArrayList<String> users = new ArrayList<String>();
+    private ObjectOutputStream os;
+
+    public Panel(ObjectOutputStream os)throws Exception
+    {
         super();
         setSize(1000,900);
+        this.os = os;
         addMouseMotionListener(this);
         addMouseListener(this);
+
+        buffer = new BufferedImage(getWidth(),getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+
         for (int i = 0; i < drop.length; i++) {
             drop[i] = new RainDrop();
         }
     }
 
-    public void paint(Graphics g) {
+    public void updateCanvas(BufferedImage drawing)
+    {
+
+    }
+
+    public void paint(Graphics bg)
+    {
+        Graphics g = buffer.getGraphics();
+
         if (f == true){
             g.setColor(Color.WHITE);
-            g.fillRect(0, 0, getWidth(), getHeight());
+            g.fillRect(600, 0, getWidth(), getHeight());
             f = false;
         }
         //Rain(g);
@@ -40,6 +62,21 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
         x1 = x;
         y1 = y;
         //System.out.println(x+" "+y);
+
+        data.setTask(-2);
+
+        try
+        {
+            os.writeObject(data);
+            os.reset();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        bg.drawImage(buffer,0,0,null);
 
     }
 
@@ -76,10 +113,12 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        System.out.println(2);
-        x = e.getX();
-        y = e.getY();
-        repaint();
+        if(e.getButton() == MouseEvent.BUTTON1)
+        {
+            x = e.getX();
+            y = e.getY();
+            repaint();
+        }
     }
 
     @Override
@@ -90,7 +129,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(1);
+        //System.out.println(1);
         x1 = x = e.getX();
         y1 = y = e.getY();
 
@@ -104,10 +143,10 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
     @Override
     public void mouseReleased(MouseEvent e) {
         // clear
-        //if (e.getButton() == MouseEvent.BUTTON3){
-        //    f=true;
-        //    repaint();
-        //}
+        if (e.getButton() == MouseEvent.BUTTON3){
+            f=true;
+            repaint();
+        }
 
 
     }

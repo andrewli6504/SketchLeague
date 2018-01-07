@@ -13,6 +13,7 @@ public class ServersListener implements Runnable
     private static ArrayList<String> users = new ArrayList<String>();
 
     CommandToServer command;
+    CommandFromServer commandOut;
 
     public ServersListener(ObjectOutputStream os, ObjectInputStream is)
     {
@@ -31,7 +32,6 @@ public class ServersListener implements Runnable
                 String name = command.getName();
                 int n = command.getTask();
                 String mes = command.getMessage();
-                BufferedImage drawing = command.getDrawing();
 
                 if(n == 1)
                     users.add(name);
@@ -40,11 +40,8 @@ public class ServersListener implements Runnable
 
                 for(ObjectOutputStream tempOS : osList)
                 {
-                    tempOS.writeObject(users);
-                    tempOS.reset();
-                    tempOS.writeObject(mes);
-                    tempOS.reset();
-                    tempOS.writeObject(n);
+                    commandOut = new CommandFromServer(users, mes, n);
+                    tempOS.writeObject(commandOut);
                     tempOS.reset();
                 }
             }
