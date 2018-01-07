@@ -39,7 +39,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener,
         g.drawLine(x,y,x1,y1);
         x1 = x;
         y1 = y;
-        System.out.println(x+" "+y);
+        //System.out.println(x+" "+y);
 
     }
 

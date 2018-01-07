@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.image.BufferedImage;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ public class ServersListener implements Runnable
     private static ArrayList<ObjectOutputStream> osList = new ArrayList<ObjectOutputStream>();
     private ObjectOutputStream os;
     private static ArrayList<String> users = new ArrayList<String>();
+
+    CommandToServer command;
 
     public ServersListener(ObjectOutputStream os, ObjectInputStream is)
     {
@@ -24,9 +27,11 @@ public class ServersListener implements Runnable
         {
             while(true)
             {
-                String name = (String) is.readObject();
-                int n = (int) is.readObject();
-                String mes = (String) is.readObject();
+                command = (CommandToServer)is.readObject();
+                String name = command.getName();
+                int n = command.getTask();
+                String mes = command.getMessage();
+                BufferedImage drawing = command.getDrawing();
 
                 if(n == 1)
                     users.add(name);

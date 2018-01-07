@@ -26,8 +26,7 @@ public class ChatFrame extends JFrame
 
         addWindowListener(new WindowAdapter()
         {
-            public void windowClosing(WindowEvent winEvt)
-            {
+            public void windowClosing(WindowEvent winEvt){
                 try
                 {
                     cp.exit();

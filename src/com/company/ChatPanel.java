@@ -1,6 +1,5 @@
 package com.company;
 
-import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.ObjectOutputStream;
@@ -43,6 +42,8 @@ public class ChatPanel extends JPanel
     private JRadioButton blueGray       = new JRadioButton("blueGray   ");
     private JRadioButton pink           = new JRadioButton("pink       ");
 
+
+    private CommandToServer data;
     private String userName = "";
     private ArrayList<String> users = new ArrayList<String>();
     private ObjectOutputStream os;
@@ -55,11 +56,8 @@ public class ChatPanel extends JPanel
         this.userName = userName;
         this.os = os;
 
-        os.writeObject(userName);
-        os.reset();
-        os.writeObject(1);
-        os.reset();
-        os.writeObject("");
+        data = new CommandToServer(userName, 1, "", null);
+        os.writeObject(data);
         os.reset();
 
         list_users.setListData(users.toArray());
@@ -118,14 +116,10 @@ public class ChatPanel extends JPanel
     {
         try
         {
-            os.writeObject(userName);
+            data.setTask(0);
+            data.setMessage(userName + " has left the room!\n");
+            os.writeObject(data);
             os.reset();
-            os.writeObject(0);
-            os.reset();
-            os.writeObject(userName + " has left the room!\n");
-            os.reset();
-
-            System.exit(0);
 
             System.exit(0);
         }
@@ -141,12 +135,12 @@ public class ChatPanel extends JPanel
         {
             if(txt_message.getText() != null && txt_message.getText().compareTo("") != 0)
             {
-                os.writeObject("");
+                data.setTask(-1);
+                data.setMessage(userName + ": " + txt_message.getText() + "\n");
+
+                os.writeObject(data);
                 os.reset();
-                os.writeObject(-1);
-                os.reset();
-                os.writeObject(userName + ": " + txt_message.getText() + "\n");
-                os.reset();
+
                 txt_message.setText("");
                 repaint();
             }
