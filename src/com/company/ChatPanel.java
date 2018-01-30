@@ -20,28 +20,6 @@ public class ChatPanel extends JPanel
     private JLabel lbl_message = new JLabel("Enter Message:");
     private JTextArea txt_message = new JTextArea();
 
-    private ButtonGroup colors = new ButtonGroup();
-    private JRadioButton black          = new JRadioButton("black      ");
-    private JRadioButton gray           = new JRadioButton("gray       ");
-    private JRadioButton lightGray      = new JRadioButton("lightGray  ");
-    private JRadioButton white          = new JRadioButton("white      ");
-    private JRadioButton red            = new JRadioButton("red        ");
-    private JRadioButton darkRed        = new JRadioButton("darkRed    ");
-    private JRadioButton orange         = new JRadioButton("orange     ");
-    private JRadioButton lightOrange    = new JRadioButton("lightOrange");
-    private JRadioButton yellow         = new JRadioButton("yellow     ");
-    private JRadioButton tan            = new JRadioButton("tan        ");
-    private JRadioButton green          = new JRadioButton("green      ");
-    private JRadioButton brown          = new JRadioButton("brown      ");
-    private JRadioButton lightGreen     = new JRadioButton("lightGreen ");
-    private JRadioButton lightBlue      = new JRadioButton("lightBlue  ");
-    private JRadioButton blue           = new JRadioButton("blue       ");
-    private JRadioButton darkBlue       = new JRadioButton("darkBlue   ");
-    private JRadioButton purple         = new JRadioButton("purple     ");
-    private JRadioButton lightPurple    = new JRadioButton("lightPurple");
-    private JRadioButton blueGray       = new JRadioButton("blueGray   ");
-    private JRadioButton pink           = new JRadioButton("pink       ");
-
 
     private CommandToServer data;
     private String userName = "";
@@ -64,7 +42,6 @@ public class ChatPanel extends JPanel
         list_users.setEnabled(false);
         lbl_users.setBounds(340, 30, 130, 20);
         list_users.setBounds(340, 50, 130, 550);
-
 
         scr_chatBox = new JScrollPane(txt_chatBox, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scr_chatBox.setBounds(20, 50, 300, 550);

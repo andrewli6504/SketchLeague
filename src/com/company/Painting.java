@@ -12,22 +12,28 @@ public class Painting implements Serializable
     public Painting()
     {
         image = new ArrayList<>();
-        tempLine = null;
+        tempLine = new ArrayList<>();
     }
 
     public void addPoint(Point p)
     {
-        if(tempLine==null)
+        if(tempLine.isEmpty())
         {
             tempLine = new ArrayList<>();
+            tempLine.add(p);
+            image.add(tempLine);
         }
-        tempLine.add(p);
+        else
+        {
+            tempLine.add(p);
+            image.set(image.size()-1, tempLine);
+        }
     }
 
     public void finishLine()
     {
         image.add(tempLine);
-        tempLine.clear();
+        tempLine = new ArrayList<Point>();
     }
 
     public void clear()

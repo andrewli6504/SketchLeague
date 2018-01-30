@@ -12,13 +12,34 @@ import java.awt.event.KeyListener;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener
 {
-    Color c = Color.black;
     int x1 = 0;
     int y1 = 0;
     int x2 = 0;
     int y2 = 0;
-    int ct = 1;
-    boolean f = true;
+
+
+    private ButtonGroup colors = new ButtonGroup();
+    private JRadioButton black          = new JRadioButton("black      ");
+    private JRadioButton gray           = new JRadioButton("gray       ");
+    private JRadioButton lightGray      = new JRadioButton("lightGray  ");
+    private JRadioButton white          = new JRadioButton("white      ");
+    private JRadioButton red            = new JRadioButton("red        ");
+    private JRadioButton darkRed        = new JRadioButton("darkRed    ");
+    private JRadioButton orange         = new JRadioButton("orange     ");
+    private JRadioButton lightOrange    = new JRadioButton("lightOrange");
+    private JRadioButton yellow         = new JRadioButton("yellow     ");
+    private JRadioButton tan            = new JRadioButton("tan        ");
+    private JRadioButton green          = new JRadioButton("green      ");
+    private JRadioButton brown          = new JRadioButton("brown      ");
+    private JRadioButton lightGreen     = new JRadioButton("lightGreen ");
+    private JRadioButton lightBlue      = new JRadioButton("lightBlue  ");
+    private JRadioButton blue           = new JRadioButton("blue       ");
+    private JRadioButton darkBlue       = new JRadioButton("darkBlue   ");
+    private JRadioButton purple         = new JRadioButton("purple     ");
+    private JRadioButton lightPurple    = new JRadioButton("lightPurple");
+    private JRadioButton blueGray       = new JRadioButton("blueGray   ");
+    private JRadioButton pink           = new JRadioButton("pink       ");
+
 
     private BufferedImage buffer;
 
@@ -47,6 +68,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     public void updateCanvas(Painting image)
     {
         draw = image;
+        repaint();
     }
 
     public void paint(Graphics bg)
@@ -62,7 +84,6 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
             for (int x = 1; x < line.size(); x++)
             {
                 g.drawLine(line.get(x - 1).x, line.get(x - 1).y, line.get(x).x, line.get(x).y);
-                System.out.println(line.get(x - 1).x + " " + line.get(x - 1).y + " " + line.get(x).x + " " + line.get(x).y);
             }
         }
 
@@ -116,25 +137,28 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     @Override
     public void mousePressed(MouseEvent e)
     {
-        x1 = x2 = e.getX();
-        y1 = y2 = e.getY();
-
-        point1.setLocation(x1, y1);
-
-        draw.addPoint(point1);
-        data.setDraw(draw);
-        data.setTask(-2);
-
-        try
+        if(e.getButton() == MouseEvent.BUTTON1)
         {
-            os.writeObject(data);
-            os.reset();
-        } catch (Exception ex)
-        {
-            ex.printStackTrace();
+            x1 = x2 = e.getX();
+            y1 = y2 = e.getY();
+
+            point1.setLocation(x1, y1);
+
+            draw.addPoint(point1);
+            data.setDraw(draw);
+            data.setTask(-2);
+
+            try
+            {
+                os.writeObject(data);
+                os.reset();
+            } catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+
+            repaint();
         }
-
-        repaint();
     }
 
     @Override
@@ -143,8 +167,6 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
         // clear
         if (e.getButton() == MouseEvent.BUTTON3)
         {
-            f = true;
-
             draw.clear();
             data.setDraw(draw);
             data.setTask(-4);
