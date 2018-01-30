@@ -10,9 +10,9 @@ public class CommandFromServer implements Serializable
     private String messages;
     private ArrayList<String> users;
     private int task;
-    private Point draw;
+    private Painting draw;
 
-    public CommandFromServer(ArrayList<String> users, String messages, int task, Point draw)
+    public CommandFromServer(ArrayList<String> users, String messages, int task, Painting draw)
     {
         this.users = users;
         this.messages = messages;
@@ -50,12 +50,12 @@ public class CommandFromServer implements Serializable
         this.task = task;
     }
 
-    public Point getDraw()
+    public Painting getDraw()
     {
         return draw;
     }
 
-    public void setDraw(Point draw)
+    public void setDraw(Painting draw)
     {
         this.draw = draw;
     }

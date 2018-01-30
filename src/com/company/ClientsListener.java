@@ -36,7 +36,7 @@ public class ClientsListener implements Runnable
                 ArrayList<String> users = command.getUsers();
                 String mes = command.getMessages();
                 int n = command.getTask();
-                Point draw = command.getDraw();
+                Painting draw = command.getDraw();
 
                 if(n > -2)
                 {

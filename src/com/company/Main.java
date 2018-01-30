@@ -15,27 +15,27 @@ public class Main
     public static void main(String[] args)
     {
 
-        Scanner key = new Scanner(System.in);
-        System.out.print("Enter the ip address: ");
-        String ip = key.next();
-        key.nextLine();
-        System.out.print("Enter your name:");
-        String name = key.nextLine();
-        while(name.length() < 0 || name.length() > 17)
-        {
-            System.out.print("Not a valid name. Try again:");
-            name = key.nextLine();
-        }
+//        Scanner key = new Scanner(System.in);
+//        System.out.print("Enter the ip address: ");
+//        String ip = key.next();
+//        key.nextLine();
+//        System.out.print("Enter your name:");
+//        String name = key.nextLine();
+//        while(name.length() < 0 || name.length() > 17)
+//        {
+//            System.out.print("Not a valid name. Try again:");
+//            name = key.nextLine();
+//        }
 
         try
         {
-            Socket socket = new Socket(ip, 2022);
+            Socket socket = new Socket("127.0.0.1", 2022);
             System.out.println("Connected to Server!");
 
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
 
-            ChatFrame f = new ChatFrame(name, os);
+            ChatFrame f = new ChatFrame("Andrew", os);
             ClientsListener cl = new ClientsListener(os, is, f);
             Thread t = new Thread(cl);
             t.start();

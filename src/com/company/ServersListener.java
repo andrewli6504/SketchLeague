@@ -33,7 +33,7 @@ public class ServersListener implements Runnable
                 String name = command.getName();
                 int n = command.getTask();
                 String mes = command.getMessage();
-                Point draw = command.getDraw();
+                Painting draw = command.getDraw();
 
                 if(n == 1)
                     users.add(name);

@@ -13,13 +13,14 @@ public class CommandToServer implements Serializable
      * 1 is to add a user
      * 0 is to remove a user
      * -1 is to send a message
-     * -2 is for drawing
+     * -2 is for drawing a point
+     * -3 is for finishing a line
      */
     private int task;
-    private Point draw;
+    private Painting draw;
     private String message;
 
-    public CommandToServer(String name, int task, String message, Point draw)
+    public CommandToServer(String name, int task, String message, Painting draw)
     {
         this.name = name;
         this.task = task;
@@ -57,12 +58,12 @@ public class CommandToServer implements Serializable
         this.message = message;
     }
 
-    public Point getDraw()
+    public Painting getDraw()
     {
         return draw;
     }
 
-    public void setDraw(Point draw)
+    public void setDraw(Painting draw)
     {
         this.draw = draw;
     }
