@@ -1,7 +1,10 @@
 package com.company;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
@@ -29,7 +32,7 @@ public class ChatPanel extends JPanel
     public ChatPanel(String userName, ObjectOutputStream os) throws Exception
     {
         super();
-        setSize(470,900);
+        setSize(480,900);
 
         this.userName = userName;
         this.os = os;
@@ -51,10 +54,10 @@ public class ChatPanel extends JPanel
         txt_message.setBounds(20, 650, 300, 80);
         lbl_message.setBounds(20, 630, 100, 20);
 
-        btn_send.setBounds(340, 650, 130, 30);
-        btn_exit.setBounds(340, 700, 130, 30);
 
         setLayout(null);
+        btn_send.setBounds(340, 650, 130, 30);
+        btn_exit.setBounds(340, 700, 130, 30);
 
         add(txt_message);
         add(lbl_message);
@@ -64,7 +67,6 @@ public class ChatPanel extends JPanel
         add(list_users);
         add(btn_send);
         add(btn_exit);
-
 
         btn_exit.addActionListener(
                 new ActionListener()
@@ -85,8 +87,6 @@ public class ChatPanel extends JPanel
                     }
                 }
         );
-
-
     }
 
     public void exit()

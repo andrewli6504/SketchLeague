@@ -21,7 +21,7 @@ public class ChatFrame extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1600, 800);
 
-        p.setBounds(600,0,1000,900);
+        p.setBounds(470,0,1000,1030);
         setLayout(null);
 
 
@@ -39,8 +39,8 @@ public class ChatFrame extends JFrame
             }
         });
 
-        add(p);
         add(cp);
+        add(p);
         setResizable(false);
         setVisible(true);
     }
