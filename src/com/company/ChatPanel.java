@@ -22,8 +22,7 @@ public class ChatPanel extends JPanel
 
     private JLabel lbl_message = new JLabel("Enter Message:");
     private JTextArea txt_message = new JTextArea();
-
-
+    
     private CommandToServer data;
     private String userName = "";
     private ArrayList<String> users = new ArrayList<String>();

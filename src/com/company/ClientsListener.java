@@ -38,7 +38,7 @@ public class ClientsListener implements Runnable
                 int n = command.getTask();
                 Painting draw = command.getDraw();
 
-                if(n > -2)
+                if(n > -2 && n <= 1)
                 {
                     cp.update(mes);
                     cp.updateUsers(users, n);

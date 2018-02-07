@@ -16,22 +16,34 @@ import java.awt.event.KeyListener;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener
 {
+    /**
+     * used to store the x and y values of the points used to draw.
+     */
     int x1 = 0;
     int y1 = 0;
-    int x2 = 0;
-    int y2 = 0;
-
 
     private BufferedImage buffer;
 
+    /**
+     * used to send data to the server.
+     * this class uses the task and drawing.
+     */
     private CommandToServer data = new CommandToServer("", 999, "", null);
-    private String userName = "";
-    private ArrayList<String> users = new ArrayList<String>();
     private ObjectOutputStream os;
-    private Painting draw = new Painting();
-    private Point point1 = new Point(0, 0);
-    private Point point2 = new Point(0, 0);
 
+    /**
+     * the image that is being drawn on the screen
+     */
+    private Painting draw = new Painting();
+
+    /**
+     * used to store the point where the mouse is drawing
+     */
+    private Point point1 = new Point(0, 0);
+
+    /**
+     * the color selection buttons
+     */
     private ButtonGroup colors = new ButtonGroup();
     private JRadioButtonMenuItem black      ;
     private JRadioButtonMenuItem gray       ;
@@ -63,6 +75,11 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
         addMouseMotionListener(this);
         addMouseListener(this);
 
+        data.setTask(2);
+        data.setDraw(null);
+        os.writeObject(data);
+        os.reset();
+
         setLayout(null);
 
         try
@@ -88,26 +105,27 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
             lightPurple = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightPurple.png"))));
             pink        = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/pink.png"))));
 
-            black      .setBounds(520,0  ,45,30);
-            gray       .setBounds(520,30 ,45,30);
-            lightGray  .setBounds(520,60 ,45,30);
-            white      .setBounds(520,90 ,45,30);
-            red        .setBounds(520,120,45,30);
-            darkRed    .setBounds(520,150,45,30);
-            orange     .setBounds(520,180,45,30);
-            yellow     .setBounds(520,210,45,30);
-            tan        .setBounds(520,240,45,30);
-            brown      .setBounds(520,270,45,30);
-            lightGreen .setBounds(520,300,45,30);
-            green      .setBounds(520,330,45,30);
-            darkGreen  .setBounds(520,360,45,30);
-            lightBlue  .setBounds(520,390,45,30);
-            blue       .setBounds(520,420,45,30);
-            darkBlue   .setBounds(520,450,45,30);
-            blueGreen  .setBounds(520,480,45,30);
-            purple     .setBounds(520,510,45,30);
-            lightPurple.setBounds(520,540,45,30);
-            pink       .setBounds(520,570,45,30);
+            black      .setBounds(0,0  ,45,30);
+            gray       .setBounds(0,30 ,45,30);
+            lightGray  .setBounds(0,60 ,45,30);
+            white      .setBounds(0,90 ,45,30);
+            red        .setBounds(0,120,45,30);
+            darkRed    .setBounds(0,150,45,30);
+            orange     .setBounds(0,180,45,30);
+            yellow     .setBounds(0,210,45,30);
+            tan        .setBounds(0,240,45,30);
+            brown      .setBounds(0,270,45,30);
+            lightGreen .setBounds(0,300,45,30);
+            green      .setBounds(0,330,45,30);
+            darkGreen  .setBounds(0,360,45,30);
+            lightBlue  .setBounds(0,390,45,30);
+            blue       .setBounds(0,420,45,30);
+            darkBlue   .setBounds(0,450,45,30);
+            blueGreen  .setBounds(0,480,45,30);
+            purple     .setBounds(0,510,45,30);
+            lightPurple.setBounds(0,540,45,30);
+            pink       .setBounds(0,570,45,30);
+
 
             colors.add(black      );
             colors.add(gray       );
@@ -182,6 +200,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
             {
                 if(line.get(x - 1).x>130 && line.get(x).x>130)
                     g.drawLine(line.get(x - 1).x, line.get(x - 1).y, line.get(x).x, line.get(x).y);
+
             }
         }
 
@@ -236,8 +255,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     {
         if(e.getButton() == MouseEvent.BUTTON1)
         {
-            x1 = x2 = e.getX();
-            y1 = y2 = e.getY();
+            x1 = e.getX();
+            y1 = e.getY();
 
             point1.setLocation(x1, y1);
 

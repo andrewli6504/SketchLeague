@@ -45,4 +45,9 @@ public class Painting implements Serializable
     {
         return image;
     }
+
+    public void setImage(ArrayList<ArrayList<Point>> image)
+    {
+        this.image = image;
+    }
 }

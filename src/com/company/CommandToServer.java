@@ -10,6 +10,7 @@ public class CommandToServer implements Serializable
     private String name;
 
     /**
+     * 2 is to get the image when joining
      * 1 is to add a user
      * 0 is to remove a user
      * -1 is to send a message
