@@ -12,7 +12,7 @@ public class ServersListener implements Runnable
     private static ArrayList<ObjectOutputStream> osList = new ArrayList<ObjectOutputStream>();
     private ObjectOutputStream os;
     private static ArrayList<String> users = new ArrayList<String>();
-    private Painting storedDraw = new Painting();
+    private static Painting storedDraw = new Painting();
     CommandToServer command;
     CommandFromServer commandOut;
 
@@ -35,8 +35,10 @@ public class ServersListener implements Runnable
                 String mes = command.getMessage();
                 Painting draw = command.getDraw();
 
-                if(command.getDraw()!=null)
+                if(draw!=null)
+                {
                     storedDraw.setImage(draw.getImage());
+                }
                 else
                 {
                     draw = new Painting();
