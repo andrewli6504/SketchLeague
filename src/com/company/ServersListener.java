@@ -34,16 +34,21 @@ public class ServersListener implements Runnable
                 int n = command.getTask();
                 String mes = command.getMessage();
                 Painting draw = command.getDraw();
+                Color color = command.getC();
 
                 if(draw!=null)
                 {
                     storedDraw.setImage(draw.getImage());
+                    storedDraw.setColors(draw.getColors());
                 }
                 else
                 {
                     draw = new Painting();
                     draw.setImage(storedDraw.getImage());
+                    draw.setColors(storedDraw.getColors());
                 }
+
+
 
                 if(n == 1)
                     users.add(name);
@@ -53,6 +58,8 @@ public class ServersListener implements Runnable
                 for(ObjectOutputStream tempOS : osList)
                 {
                     commandOut = new CommandFromServer(users, mes, n, draw);
+                    if(n == 3)
+                        commandOut.setC(color);
                     tempOS.writeObject(commandOut);
                     tempOS.reset();
                 }

@@ -10,6 +10,7 @@ public class CommandToServer implements Serializable
     private String name;
 
     /**
+     * 3 is to change the color
      * 2 is to get the image when joining
      * 1 is to add a user
      * 0 is to remove a user
@@ -20,6 +21,17 @@ public class CommandToServer implements Serializable
     private int task;
     private Painting draw;
     private String message;
+    private Color c;
+
+    public Color getC()
+    {
+        return c;
+    }
+
+    public void setC(Color c)
+    {
+        this.c = c;
+    }
 
     public CommandToServer(String name, int task, String message, Painting draw)
     {

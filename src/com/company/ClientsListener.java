@@ -37,6 +37,7 @@ public class ClientsListener implements Runnable
                 String mes = command.getMessages();
                 int n = command.getTask();
                 Painting draw = command.getDraw();
+                Color c = command.getC();
 
                 if(n > -2 && n <= 1)
                 {
@@ -45,7 +46,7 @@ public class ClientsListener implements Runnable
                 }
                 else
                 {
-                    p.updateCanvas(draw);
+                    p.updateCanvas(draw, c);
                 }
 
             }

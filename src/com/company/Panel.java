@@ -42,34 +42,20 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     private Point point1 = new Point(0, 0);
 
     /**
-     * the color selection buttons
+     * stores the current color selected
      */
-    private ButtonGroup colors = new ButtonGroup();
-    private JRadioButtonMenuItem black      ;
-    private JRadioButtonMenuItem gray       ;
-    private JRadioButtonMenuItem lightGray  ;
-    private JRadioButtonMenuItem white      ;
-    private JRadioButtonMenuItem red        ;
-    private JRadioButtonMenuItem darkRed    ;
-    private JRadioButtonMenuItem orange     ;
-    private JRadioButtonMenuItem yellow     ;
-    private JRadioButtonMenuItem tan        ;
-    private JRadioButtonMenuItem brown      ;
-    private JRadioButtonMenuItem lightGreen ;
-    private JRadioButtonMenuItem green      ;
-    private JRadioButtonMenuItem darkGreen  ;
-    private JRadioButtonMenuItem lightBlue  ;
-    private JRadioButtonMenuItem blue       ;
-    private JRadioButtonMenuItem darkBlue   ;
-    private JRadioButtonMenuItem blueGreen  ;
-    private JRadioButtonMenuItem purple     ;
-    private JRadioButtonMenuItem lightPurple;
-    private JRadioButtonMenuItem pink       ;
+    private Color color = Color.black;
+
+    /**
+     * stores whether or not the player is the one currently drawing
+     */
+    private boolean isDrawing = false;
+
 
     public Panel(ObjectOutputStream os) throws Exception
     {
         super();
-        setSize(1130, 900);
+        setSize(1120, 900);
         this.os = os;
 
         addMouseMotionListener(this);
@@ -80,109 +66,15 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
         os.writeObject(data);
         os.reset();
 
-        setLayout(null);
-
-        try
-        {
-            black       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/black.png"))));
-            gray        = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/gray.png"))));
-            lightGray   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightGray.png"))));
-            white       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/white.png"))));
-            red         = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/red.png"))));
-            darkRed     = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/darkRed.png"))));
-            orange      = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/orange.png"))));
-            yellow      = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/yellow.png"))));
-            tan         = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/tan.png"))));
-            brown       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/brown.png"))));
-            lightGreen  = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightGreen.png"))));
-            green       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/green.png"))));
-            darkGreen   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/darkGreen.png"))));
-            lightBlue   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightBlue.png"))));
-            blue        = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/blue.png"))));
-            darkBlue    = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/darkBlue.png"))));
-            blueGreen   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/blueGreen.png"))));
-            purple      = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/purple.png"))));
-            lightPurple = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightPurple.png"))));
-            pink        = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/pink.png"))));
-
-            black      .setBounds(0,0  ,45,30);
-            gray       .setBounds(0,30 ,45,30);
-            lightGray  .setBounds(0,60 ,45,30);
-            white      .setBounds(0,90 ,45,30);
-            red        .setBounds(0,120,45,30);
-            darkRed    .setBounds(0,150,45,30);
-            orange     .setBounds(0,180,45,30);
-            yellow     .setBounds(0,210,45,30);
-            tan        .setBounds(0,240,45,30);
-            brown      .setBounds(0,270,45,30);
-            lightGreen .setBounds(0,300,45,30);
-            green      .setBounds(0,330,45,30);
-            darkGreen  .setBounds(0,360,45,30);
-            lightBlue  .setBounds(0,390,45,30);
-            blue       .setBounds(0,420,45,30);
-            darkBlue   .setBounds(0,450,45,30);
-            blueGreen  .setBounds(0,480,45,30);
-            purple     .setBounds(0,510,45,30);
-            lightPurple.setBounds(0,540,45,30);
-            pink       .setBounds(0,570,45,30);
-
-
-            colors.add(black      );
-            colors.add(gray       );
-            colors.add(lightGray  );
-            colors.add(white      );
-            colors.add(red        );
-            colors.add(darkRed    );
-            colors.add(orange     );
-            colors.add(yellow     );
-            colors.add(tan        );
-            colors.add(brown      );
-            colors.add(lightGreen );
-            colors.add(green      );
-            colors.add(darkGreen  );
-            colors.add(lightBlue  );
-            colors.add(blue       );
-            colors.add(darkBlue   );
-            colors.add(blueGreen  );
-            colors.add(purple     );
-            colors.add(lightPurple);
-            colors.add(pink       );
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        add(black      );
-        add(gray       );
-        add(lightGray  );
-        add(white      );
-        add(red        );
-        add(darkRed    );
-        add(orange     );
-        add(yellow     );
-        add(tan        );
-        add(brown      );
-        add(lightGreen );
-        add(green      );
-        add(darkGreen  );
-        add(lightBlue  );
-        add(blue       );
-        add(darkBlue   );
-        add(blueGreen  );
-        add(purple     );
-        add(lightPurple);
-        add(pink       );
-
-
         buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 
         repaint();
     }
 
-    public void updateCanvas(Painting image)
+    public void updateCanvas(Painting image, Color c)
     {
         draw = image;
+        color = c;
         repaint();
     }
 
@@ -194,8 +86,11 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
         g.fillRect(130, 0, getWidth(), getHeight());
 
         g.setColor(Color.black);
-        for (ArrayList<Point> line : draw.getImage())
+        for (int a = 0;a<draw.getImage().size();a++)
         {
+            ArrayList<Point> line = draw.getImage().get(a);
+            g.setColor(draw.getColors().get(a));
+
             for (int x = 1; x < line.size(); x++)
             {
                 if(line.get(x - 1).x>130 && line.get(x).x>130)
@@ -220,11 +115,13 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     @Override
     public void mouseDragged(MouseEvent e)
     {
+        if(!isDrawing)
+            return;
         x1 = e.getX();
         y1 = e.getY();
         point1.setLocation(x1, y1);
 
-        draw.addPoint(point1);
+        draw.addPoint(point1, color);
         data.setDraw(draw);
         data.setTask(-2);
         try
@@ -253,6 +150,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     @Override
     public void mousePressed(MouseEvent e)
     {
+        if(!isDrawing)
+            return;
         if(e.getButton() == MouseEvent.BUTTON1)
         {
             x1 = e.getX();
@@ -260,7 +159,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
 
             point1.setLocation(x1, y1);
 
-            draw.addPoint(point1);
+            draw.addPoint(point1, color);
             data.setDraw(draw);
             data.setTask(-2);
 
@@ -280,6 +179,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     @Override
     public void mouseReleased(MouseEvent e)
     {
+        if(!isDrawing)
+            return;
         // clear
         if (e.getButton() == MouseEvent.BUTTON3)
         {

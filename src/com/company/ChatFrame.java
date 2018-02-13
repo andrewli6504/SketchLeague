@@ -21,7 +21,7 @@ public class ChatFrame extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1600, 800);
 
-        p.setBounds(470,0,1000,1030);
+        p.setBounds(480,0,1120,900);
         setLayout(null);
 
 

@@ -11,6 +11,17 @@ public class CommandFromServer implements Serializable
     private ArrayList<String> users;
     private int task;
     private Painting draw;
+    private Color c;
+
+    public Color getC()
+    {
+        return c;
+    }
+
+    public void setC(Color c)
+    {
+        this.c = c;
+    }
 
     public CommandFromServer(ArrayList<String> users, String messages, int task, Painting draw)
     {

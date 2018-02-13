@@ -22,7 +22,33 @@ public class ChatPanel extends JPanel
 
     private JLabel lbl_message = new JLabel("Enter Message:");
     private JTextArea txt_message = new JTextArea();
-    
+
+    /**
+     * the color selection buttons
+     */
+    private ButtonGroup colors = new ButtonGroup();
+    private JRadioButtonMenuItem black      ;
+    private JRadioButtonMenuItem gray       ;
+    private JRadioButtonMenuItem lightGray  ;
+    private JRadioButtonMenuItem white      ;
+    private JRadioButtonMenuItem red        ;
+    private JRadioButtonMenuItem darkRed    ;
+    private JRadioButtonMenuItem orange     ;
+    private JRadioButtonMenuItem yellow     ;
+    private JRadioButtonMenuItem tan        ;
+    private JRadioButtonMenuItem brown      ;
+    private JRadioButtonMenuItem lightGreen ;
+    private JRadioButtonMenuItem green      ;
+    private JRadioButtonMenuItem darkGreen  ;
+    private JRadioButtonMenuItem lightBlue  ;
+    private JRadioButtonMenuItem blue       ;
+    private JRadioButtonMenuItem darkBlue   ;
+    private JRadioButtonMenuItem blueGreen  ;
+    private JRadioButtonMenuItem purple     ;
+    private JRadioButtonMenuItem lightPurple;
+    private JRadioButtonMenuItem pink       ;
+
+
     private CommandToServer data;
     private String userName = "";
     private ArrayList<String> users = new ArrayList<String>();
@@ -31,7 +57,7 @@ public class ChatPanel extends JPanel
     public ChatPanel(String userName, ObjectOutputStream os) throws Exception
     {
         super();
-        setSize(480,900);
+        setSize(600,900);
 
         this.userName = userName;
         this.os = os;
@@ -55,6 +81,77 @@ public class ChatPanel extends JPanel
 
 
         setLayout(null);
+
+        try
+        {
+            black       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/black.png"))));
+            gray        = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/gray.png"))));
+            lightGray   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightGray.png"))));
+            white       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/white.png"))));
+            red         = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/red.png"))));
+            darkRed     = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/darkRed.png"))));
+            orange      = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/orange.png"))));
+            yellow      = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/yellow.png"))));
+            tan         = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/tan.png"))));
+            brown       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/brown.png"))));
+            lightGreen  = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightGreen.png"))));
+            green       = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/green.png"))));
+            darkGreen   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/darkGreen.png"))));
+            lightBlue   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightBlue.png"))));
+            blue        = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/blue.png"))));
+            darkBlue    = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/darkBlue.png"))));
+            blueGreen   = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/blueGreen.png"))));
+            purple      = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/purple.png"))));
+            lightPurple = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/lightPurple.png"))));
+            pink        = new JRadioButtonMenuItem(new ImageIcon(ImageIO.read(new File("Colors/pink.png"))));
+
+            black      .setBounds(480,0  ,45,30);
+            gray       .setBounds(480,30 ,45,30);
+            lightGray  .setBounds(480,60 ,45,30);
+            white      .setBounds(480,90 ,45,30);
+            red        .setBounds(480,120,45,30);
+            darkRed    .setBounds(480,150,45,30);
+            orange     .setBounds(480,180,45,30);
+            yellow     .setBounds(480,210,45,30);
+            tan        .setBounds(480,240,45,30);
+            brown      .setBounds(480,270,45,30);
+            lightGreen .setBounds(480,300,45,30);
+            green      .setBounds(480,330,45,30);
+            darkGreen  .setBounds(480,360,45,30);
+            lightBlue  .setBounds(480,390,45,30);
+            blue       .setBounds(480,420,45,30);
+            darkBlue   .setBounds(480,450,45,30);
+            blueGreen  .setBounds(480,480,45,30);
+            purple     .setBounds(480,510,45,30);
+            lightPurple.setBounds(480,540,45,30);
+            pink       .setBounds(480,570,45,30);
+
+            colors.add(black      );
+            colors.add(gray       );
+            colors.add(lightGray  );
+            colors.add(white      );
+            colors.add(red        );
+            colors.add(darkRed    );
+            colors.add(orange     );
+            colors.add(yellow     );
+            colors.add(tan        );
+            colors.add(brown      );
+            colors.add(lightGreen );
+            colors.add(green      );
+            colors.add(darkGreen  );
+            colors.add(lightBlue  );
+            colors.add(blue       );
+            colors.add(darkBlue   );
+            colors.add(blueGreen  );
+            colors.add(purple     );
+            colors.add(lightPurple);
+            colors.add(pink       );
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
         btn_send.setBounds(340, 650, 130, 30);
         btn_exit.setBounds(340, 700, 130, 30);
 
@@ -66,6 +163,27 @@ public class ChatPanel extends JPanel
         add(list_users);
         add(btn_send);
         add(btn_exit);
+
+        add(black      );
+        add(gray       );
+        add(lightGray  );
+        add(white      );
+        add(red        );
+        add(darkRed    );
+        add(orange     );
+        add(yellow     );
+        add(tan        );
+        add(brown      );
+        add(lightGreen );
+        add(green      );
+        add(darkGreen  );
+        add(lightBlue  );
+        add(blue       );
+        add(darkBlue   );
+        add(blueGreen  );
+        add(purple     );
+        add(lightPurple);
+        add(pink       );
 
         btn_exit.addActionListener(
                 new ActionListener()
@@ -83,6 +201,387 @@ public class ChatPanel extends JPanel
                     public void actionPerformed(ActionEvent e)
                     {
                         sendtxt_message();
+                    }
+                }
+        );
+
+        black.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(0,0,0));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        gray.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(68,68,68));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        lightGray.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(201,202,196));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        white.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(255,255,255));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        red.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(192,0,0));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        darkRed.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(144,14,22));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        orange.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(255,131,9));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        yellow.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(255,255, 0));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        tan.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(214,177,150));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        brown.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(63,34,16));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        lightGreen.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(179,255,128));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        green.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(67,219,36));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        darkGreen.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(2,94,17));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        lightBlue.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(12,186,255));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        blue.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(66,130,201));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        darkBlue.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(0,0,152));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        blueGreen.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(1,109,93));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        purple.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(115,59,158));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        lightPurple.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(214,187,223));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+        );
+        pink.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        try
+                        {
+                            data.setTask(3);
+                            data.setC(new Color(237, 0, 140));
+                            os.writeObject(data);
+                            os.reset();
+                        }
+                        catch(Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
                     }
                 }
         );
