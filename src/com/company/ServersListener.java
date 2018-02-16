@@ -55,13 +55,19 @@ public class ServersListener implements Runnable
                 if(n == 0)
                     users.remove(name);
 
+                int x = 0;
                 for(ObjectOutputStream tempOS : osList)
                 {
-                    commandOut = new CommandFromServer(users, mes, n, draw);
+                    if(n-100 != x && n>=100)
+                        commandOut = new CommandFromServer(users, mes, 99, draw);
+                    else
+                        commandOut = new CommandFromServer(users, mes, n, draw);
                     if(n == 3)
                         commandOut.setC(color);
                     tempOS.writeObject(commandOut);
                     tempOS.reset();
+
+                    x++;
                 }
             }
         }

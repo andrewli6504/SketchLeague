@@ -10,6 +10,7 @@ public class CommandToServer implements Serializable
     private String name;
 
     /**
+     * over 100 is to change the drawing player
      * 3 is to change the color
      * 2 is to get the image when joining
      * 1 is to add a user

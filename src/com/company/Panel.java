@@ -2,25 +2,18 @@ package com.company;
 
 import java.awt.event.*;
 import java.awt.*;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.io.File;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.awt.image.BufferedImage;
-import java.util.Scanner;
-import java.awt.event.KeyListener;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener
 {
     /**
      * used to store the x and y values of the points used to draw.
      */
-    int x1 = 0;
-    int y1 = 0;
+    private int x1 = 0;
+    private int y1 = 0;
 
     private BufferedImage buffer;
 
@@ -68,6 +61,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
 
         buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 
+        isDrawing = true;
+
         repaint();
     }
 
@@ -78,9 +73,16 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
         repaint();
     }
 
+    public void updateCurrentDrawer(boolean isDrawing)
+    {
+        this.isDrawing = isDrawing;
+    }
+
     public void paint(Graphics bg)
     {
-        Graphics g = buffer.getGraphics();
+        Graphics g2 = buffer.getGraphics();
+        Graphics2D g = (Graphics2D) g2.create();
+        g.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
         g.setColor(Color.WHITE);
         g.fillRect(130, 0, getWidth(), getHeight());
@@ -90,6 +92,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
         {
             ArrayList<Point> line = draw.getImage().get(a);
             g.setColor(draw.getColors().get(a));
+
+            System.out.println(line.size()+"\t"+draw.getColors().size());
 
             for (int x = 1; x < line.size(); x++)
             {

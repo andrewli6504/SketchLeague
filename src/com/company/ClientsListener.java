@@ -44,11 +44,19 @@ public class ClientsListener implements Runnable
                     cp.update(mes);
                     cp.updateUsers(users, n);
                 }
+                else if(n>=100)
+                {
+                    p.updateCurrentDrawer(true);
+                    cp.updateDrawer(n-100);
+                }
+                else if(n==99)
+                {
+                    p.updateCurrentDrawer(false);
+                }
                 else
                 {
                     p.updateCanvas(draw, c);
                 }
-
             }
         }
         catch(Exception e)

@@ -12,6 +12,7 @@ public class ChatPanel extends JPanel
 {
     private JButton btn_exit = new JButton("Exit");
     private JButton btn_send = new JButton("Send");
+    private JButton next_player = new JButton("Next");
 
     private JLabel lbl_users = new JLabel("Users:");
     private JList list_users = new JList();
@@ -22,6 +23,8 @@ public class ChatPanel extends JPanel
 
     private JLabel lbl_message = new JLabel("Enter Message:");
     private JTextArea txt_message = new JTextArea();
+
+    private JLabel drawer = new JLabel("Drawing: ");
 
     /**
      * the color selection buttons
@@ -52,6 +55,11 @@ public class ChatPanel extends JPanel
     private CommandToServer data;
     private String userName = "";
     private ArrayList<String> users = new ArrayList<String>();
+
+    /**
+     * stores the index of the currently drawing player.
+     */
+    private int currentlyDrawing;
     private ObjectOutputStream os;
 
     public ChatPanel(String userName, ObjectOutputStream os) throws Exception
@@ -69,7 +77,7 @@ public class ChatPanel extends JPanel
         list_users.setListData(users.toArray());
         list_users.setEnabled(false);
         lbl_users.setBounds(340, 30, 130, 20);
-        list_users.setBounds(340, 50, 130, 550);
+        list_users.setBounds(340, 50, 130, 500);
 
         scr_chatBox = new JScrollPane(txt_chatBox, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scr_chatBox.setBounds(20, 50, 300, 550);
@@ -78,6 +86,8 @@ public class ChatPanel extends JPanel
 
         txt_message.setBounds(20, 650, 300, 80);
         lbl_message.setBounds(20, 630, 100, 20);
+
+        drawer.setBounds(340,550,100,50);
 
 
         setLayout(null);
@@ -154,6 +164,7 @@ public class ChatPanel extends JPanel
 
         btn_send.setBounds(340, 650, 130, 30);
         btn_exit.setBounds(340, 700, 130, 30);
+        next_player.setBounds(500,650,80,80);
 
         add(txt_message);
         add(lbl_message);
@@ -163,6 +174,8 @@ public class ChatPanel extends JPanel
         add(list_users);
         add(btn_send);
         add(btn_exit);
+        add(next_player);
+        add(drawer);
 
         add(black      );
         add(gray       );
@@ -201,6 +214,17 @@ public class ChatPanel extends JPanel
                     public void actionPerformed(ActionEvent e)
                     {
                         sendtxt_message();
+                    }
+                }
+        );
+
+        next_player.addActionListener(
+                new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        nextPlayer();
                     }
                 }
         );
@@ -631,6 +655,9 @@ public class ChatPanel extends JPanel
     {
         if(n == 1)
         {
+            if(users.isEmpty())
+                currentlyDrawing = 0;
+
             this.users.add(users.get(users.size() - 1));
             update(users.get(users.size() - 1) + " has joined the room!\n");
         }
@@ -646,6 +673,7 @@ public class ChatPanel extends JPanel
                 if(users.size() > 0)
                     update(users.get(users.size() - 1) + " has left the room!\n");
             }
+            currentlyDrawing = (int)(Math.random() * this.users.size());
         }
         list_users.setListData(users.toArray());
         repaint();
@@ -655,5 +683,31 @@ public class ChatPanel extends JPanel
     {
         txt_chatBox.append(message);
         repaint();
+    }
+
+    public void nextPlayer()
+    {
+        currentlyDrawing++;
+        if(currentlyDrawing>=users.size())
+            currentlyDrawing -= users.size();
+
+        drawer.setText("Drawing: "+users.get(currentlyDrawing));
+
+        try
+        {
+            data.setTask(100+currentlyDrawing);
+            os.writeObject(data);
+            os.reset();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateDrawer(int n)
+    {
+        currentlyDrawing = n;
+        drawer.setText("Drawing: "+users.get(n));
     }
 }
