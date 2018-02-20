@@ -9,6 +9,7 @@ public class CommandFromServer implements Serializable
 {
     private String messages;
     private ArrayList<String> users;
+    private ArrayList<Integer> scores;
     private int task;
     private Painting draw;
     private Color c;
@@ -23,9 +24,20 @@ public class CommandFromServer implements Serializable
         this.c = c;
     }
 
-    public CommandFromServer(ArrayList<String> users, String messages, int task, Painting draw)
+    public ArrayList<Integer> getScores()
+    {
+        return scores;
+    }
+
+    public void setScores(ArrayList<Integer> scores)
+    {
+        this.scores = scores;
+    }
+
+    public CommandFromServer(ArrayList<String> users, ArrayList<Integer> scores, String messages, int task, Painting draw)
     {
         this.users = users;
+        this.scores = scores;
         this.messages = messages;
         this.task = task;
         this.draw = draw;

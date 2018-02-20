@@ -17,6 +17,9 @@ public class ChatPanel extends JPanel
     private JLabel lbl_users = new JLabel("Users:");
     private JList list_users = new JList();
 
+    private JLabel lbl_scores = new JLabel("Scores:");
+    private JList list_scores = new JList();
+
     private JLabel lbl_chatBox = new JLabel("Messages:");
     private JScrollPane scr_chatBox = null;
     private JTextArea txt_chatBox = new JTextArea();
@@ -55,6 +58,7 @@ public class ChatPanel extends JPanel
     private CommandToServer data;
     private String userName = "";
     private ArrayList<String> users = new ArrayList<String>();
+    private ArrayList<Integer> scores = new ArrayList<Integer>();
 
     /**
      * stores the index of the currently drawing player.
@@ -76,8 +80,13 @@ public class ChatPanel extends JPanel
 
         list_users.setListData(users.toArray());
         list_users.setEnabled(false);
-        lbl_users.setBounds(340, 30, 130, 20);
-        list_users.setBounds(340, 50, 130, 500);
+        list_users.setBounds(340, 50, 70, 500);
+        lbl_users.setBounds(340, 30, 70, 20);
+
+        list_scores.setListData(scores.toArray());
+        list_scores.setEnabled(false);
+        list_scores.setBounds(420,50,50,500);
+        lbl_scores.setBounds(420,30,50,20);
 
         scr_chatBox = new JScrollPane(txt_chatBox, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scr_chatBox.setBounds(20, 50, 300, 550);
@@ -88,7 +97,6 @@ public class ChatPanel extends JPanel
         lbl_message.setBounds(20, 630, 100, 20);
 
         drawer.setBounds(340,550,100,50);
-
 
         setLayout(null);
 
@@ -176,6 +184,8 @@ public class ChatPanel extends JPanel
         add(btn_exit);
         add(next_player);
         add(drawer);
+        add(list_scores);
+        add(lbl_scores);
 
         add(black      );
         add(gray       );
@@ -597,8 +607,10 @@ public class ChatPanel extends JPanel
                     {
                         try
                         {
-                            data.setTask(3);
-                            data.setC(new Color(237, 0, 140));
+//                            data.setTask(3);
+//                            data.setC(new Color(237, 0, 140));
+                            data.setTask(4);
+
                             os.writeObject(data);
                             os.reset();
                         }
@@ -651,7 +663,7 @@ public class ChatPanel extends JPanel
     }
 
 
-    public void updateUsers(ArrayList<String> users, int n)
+    public void updateUsers(ArrayList<String> users, ArrayList<Integer> scores, int n)
     {
         if(n == 1)
         {
@@ -664,18 +676,22 @@ public class ChatPanel extends JPanel
         if(n == 0)
         {
             this.users.clear();
+            this.scores.clear();
             for(int x = 0; x < users.size(); x++)
             {
                 this.users.add(users.get(x));
+                this.scores.add(scores.get(x));
             }
-            if(!this.users.contains(userName))
-            {
-                if(users.size() > 0)
-                    update(users.get(users.size() - 1) + " has left the room!\n");
-            }
+//            This code shouldn't be needed
+//            if(!this.users.contains(userName))
+//            {
+//                if(users.size() > 0)
+//                    update(users.get(users.size() - 1) + " has left the room!\n");
+//            }
             currentlyDrawing = (int)(Math.random() * this.users.size());
         }
         list_users.setListData(users.toArray());
+        list_scores.setListData(scores.toArray());
         repaint();
     }
 

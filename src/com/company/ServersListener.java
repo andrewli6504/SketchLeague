@@ -12,6 +12,7 @@ public class ServersListener implements Runnable
     private static ArrayList<ObjectOutputStream> osList = new ArrayList<ObjectOutputStream>();
     private ObjectOutputStream os;
     private static ArrayList<String> users = new ArrayList<String>();
+    private static ArrayList<Integer> scores = new ArrayList<Integer>();
     private static Painting storedDraw = new Painting();
     CommandToServer command;
     CommandFromServer commandOut;
@@ -51,17 +52,23 @@ public class ServersListener implements Runnable
 
 
                 if(n == 1)
+                {
+                    scores.add(0);
                     users.add(name);
+                }
                 if(n == 0)
+                {
+                    scores.remove((int)users.indexOf(name));
                     users.remove(name);
+                }
 
                 int x = 0;
                 for(ObjectOutputStream tempOS : osList)
                 {
                     if(n-100 != x && n>=100)
-                        commandOut = new CommandFromServer(users, mes, 99, draw);
+                        commandOut = new CommandFromServer(users, scores, mes, 99, draw);
                     else
-                        commandOut = new CommandFromServer(users, mes, n, draw);
+                        commandOut = new CommandFromServer(users, scores, mes, n, draw);
                     if(n == 3)
                         commandOut.setC(color);
                     tempOS.writeObject(commandOut);

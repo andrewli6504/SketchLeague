@@ -9,8 +9,9 @@ public class CommandToServer implements Serializable
 {
     private String name;
 
-    /**
+    /**TODO: Make Final Variables
      * over 100 is to change the drawing player
+     * 4 is to increase score
      * 3 is to change the color
      * 2 is to get the image when joining
      * 1 is to add a user

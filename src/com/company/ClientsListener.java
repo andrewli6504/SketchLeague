@@ -34,6 +34,7 @@ public class ClientsListener implements Runnable
             {
                 command = (CommandFromServer)is.readObject();
                 ArrayList<String> users = command.getUsers();
+                ArrayList<Integer> scores = command.getScores();
                 String mes = command.getMessages();
                 int n = command.getTask();
                 Painting draw = command.getDraw();
@@ -42,7 +43,7 @@ public class ClientsListener implements Runnable
                 if(n > -2 && n <= 1)
                 {
                     cp.update(mes);
-                    cp.updateUsers(users, n);
+                    cp.updateUsers(users, scores, n);
                 }
                 else if(n>=100)
                 {
