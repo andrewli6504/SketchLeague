@@ -13,6 +13,29 @@ public class CommandFromServer implements Serializable
     private int task;
     private Painting draw;
     private Color c;
+    private String user;
+
+    public int getCurrDrawing()
+    {
+        return currDrawing;
+    }
+
+    public void setCurrDrawing(int currDrawing)
+    {
+        this.currDrawing = currDrawing;
+    }
+
+    private int currDrawing;
+
+    public String getUser()
+    {
+        return user;
+    }
+
+    public void setUser(String user)
+    {
+        this.user = user;
+    }
 
     public Color getC()
     {

@@ -44,6 +44,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
      */
     private boolean isDrawing = false;
 
+    private String name;
+
 
     public Panel(ObjectOutputStream os) throws Exception
     {
@@ -76,6 +78,12 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     public void updateCurrentDrawer(boolean isDrawing)
     {
         this.isDrawing = isDrawing;
+    }
+
+    public void recieveName(String name)
+    {
+        this.name = name;
+        data.setName(name);
     }
 
     public void paint(Graphics bg)

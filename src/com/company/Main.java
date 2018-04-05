@@ -10,8 +10,6 @@ import javax.swing.JOptionPane;
 
 public class Main
 {
-    //static ArrayList<String> names =;
-
     public static void main(String[] args)
     {
 

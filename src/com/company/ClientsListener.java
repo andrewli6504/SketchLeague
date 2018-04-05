@@ -15,6 +15,8 @@ public class ClientsListener implements Runnable
     private ChatPanel cp;
     private Panel p;
     CommandFromServer command;
+    static ArrayList<String> users = new ArrayList<String>();
+    static ArrayList<Integer> scores = new ArrayList<Integer>();
 
     public ClientsListener(ObjectOutputStream os, ObjectInputStream is, ChatFrame f)
     {
@@ -33,26 +35,51 @@ public class ClientsListener implements Runnable
             while(true)
             {
                 command = (CommandFromServer)is.readObject();
-                ArrayList<String> users = command.getUsers();
-                ArrayList<Integer> scores = command.getScores();
+                this.users = command.getUsers();
+                this.scores = command.getScores();
                 String mes = command.getMessages();
                 int n = command.getTask();
                 Painting draw = command.getDraw();
                 Color c = command.getC();
+                String player = command.getUser();
+                int currDraw = command.getCurrDrawing();
 
-                if(n > -2 && n <= 1)
+                int x = users.indexOf(player);
+                if(x == currDraw)
                 {
-                    cp.update(mes);
+                    System.out.println(true + player + x + n);
+                    p.updateCurrentDrawer(true);
+                }
+                else
+                {
+                    System.out.println(false + player + x + n);
+                    p.updateCurrentDrawer(false);
+                }
+
+                if(n >= 0 && n <= 1)
+                {
+                    cp.update(mes, player);
                     cp.updateUsers(users, scores, n);
+                }
+                else if(n == -1)
+                {
+                    cp.update(mes, player);
+                }
+                else if(n == 2)
+                {
+                    p.recieveName(player);
                 }
                 else if(n>=100)
                 {
-                    p.updateCurrentDrawer(true);
                     cp.updateDrawer(n-100);
+                    cp.updateScores(scores);
+                    cp.update(mes, player);
                 }
                 else if(n==99)
                 {
+                    cp.updateScores(scores);
                     p.updateCurrentDrawer(false);
+                    cp.update(mes, player);
                 }
                 else
                 {
@@ -65,5 +92,4 @@ public class ClientsListener implements Runnable
             e.printStackTrace();
         }
     }
-
 }

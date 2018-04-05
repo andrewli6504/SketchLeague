@@ -75,15 +75,14 @@ public class ChatPanel extends JPanel
         this.os = os;
 
         data = new CommandToServer(userName, 1, "", null);
+        data.setName(userName);
         os.writeObject(data);
         os.reset();
 
-        list_users.setListData(users.toArray());
         list_users.setEnabled(false);
         list_users.setBounds(340, 50, 70, 500);
         lbl_users.setBounds(340, 30, 70, 20);
 
-        list_scores.setListData(scores.toArray());
         list_scores.setEnabled(false);
         list_scores.setBounds(420,50,50,500);
         lbl_scores.setBounds(420,30,50,20);
@@ -607,9 +606,8 @@ public class ChatPanel extends JPanel
                     {
                         try
                         {
-//                            data.setTask(3);
-//                            data.setC(new Color(237, 0, 140));
-                            data.setTask(4);
+                            data.setTask(3);
+                            data.setC(new Color(237, 0, 140));
 
                             os.writeObject(data);
                             os.reset();
@@ -628,7 +626,8 @@ public class ChatPanel extends JPanel
         try
         {
             data.setTask(0);
-            data.setMessage(userName + " has left the room!\n");
+            data.setMessage(" has left the room!");
+            data.setName(userName);
             os.writeObject(data);
             os.reset();
 
@@ -647,7 +646,9 @@ public class ChatPanel extends JPanel
             if(txt_message.getText() != null && txt_message.getText().compareTo("") != 0)
             {
                 data.setTask(-1);
-                data.setMessage(userName + ": " + txt_message.getText() + "\n");
+
+                data.setMessage(txt_message.getText());
+                data.setName(userName);
 
                 os.writeObject(data);
                 os.reset();
@@ -667,13 +668,17 @@ public class ChatPanel extends JPanel
     {
         if(n == 1)
         {
-            if(users.isEmpty())
+            if(this.users.isEmpty())
+            {
                 currentlyDrawing = 0;
+            }
+            this.scores = scores;
+            this.users = users;
 
-            this.users.add(users.get(users.size() - 1));
-            update(users.get(users.size() - 1) + " has joined the room!\n");
+            update(" has joined the room!" ,this.users.get(this.users.size() - 1));
+
         }
-        if(n == 0)
+        else if(n == 0)
         {
             this.users.clear();
             this.scores.clear();
@@ -690,14 +695,21 @@ public class ChatPanel extends JPanel
 //            }
             currentlyDrawing = (int)(Math.random() * this.users.size());
         }
-        list_users.setListData(users.toArray());
-        list_scores.setListData(scores.toArray());
+        list_users.setListData(this.users.toArray());
+        list_scores.setListData(this.scores.toArray());
+        System.out.println(this.users + " "+this.scores);
         repaint();
     }
 
-    public void update(String message)
+    public void update(String message, String user)
     {
-        txt_chatBox.append(message);
+        if(message.equals(" has joined the room!"))
+            txt_chatBox.append(user + message + "\n");
+        else if(message.equals(" has left the room!"))
+            txt_chatBox.append(user + message + "\n");
+        else if(!message.isEmpty())
+            txt_chatBox.append(user + ": " + message + "\n");
+
         repaint();
     }
 
@@ -723,7 +735,14 @@ public class ChatPanel extends JPanel
 
     public void updateDrawer(int n)
     {
+        System.out.println(n+"\t"+users);
         currentlyDrawing = n;
         drawer.setText("Drawing: "+users.get(n));
+    }
+
+    public void updateScores(ArrayList<Integer> scores)
+    {
+        this.scores = scores;
+        list_scores.setListData(this.scores.toArray());
     }
 }
