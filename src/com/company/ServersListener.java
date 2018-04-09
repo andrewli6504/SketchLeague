@@ -84,6 +84,14 @@ public class ServersListener implements Runnable
                     int index = users.indexOf(name);
                     this.scores.set(index, scores.get(index)+100);
                     System.out.println(scores);
+
+                    currentPictureIndex++;
+                    if(currentPictureIndex >= pictureList.size())
+                    {
+                        currentPictureIndex -= pictureList.size();
+                    }
+                    currentPicture = pictureList.get(currentPictureIndex);
+                    System.out.println("NEXT PICTURE: "+currentPicture);
                 }
 
                 if(n == 1)

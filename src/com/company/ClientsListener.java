@@ -17,6 +17,7 @@ public class ClientsListener implements Runnable
     CommandFromServer command;
     static ArrayList<String> users = new ArrayList<String>();
     static ArrayList<Integer> scores = new ArrayList<Integer>();
+    private String name;
 
     public ClientsListener(ObjectOutputStream os, ObjectInputStream is, ChatFrame f)
     {
@@ -25,6 +26,7 @@ public class ClientsListener implements Runnable
         this.f = f;
         cp = f.getChat();
         p = f.getDrawings();
+        name = cp.getUserName();
     }
 
     @Override
@@ -44,15 +46,15 @@ public class ClientsListener implements Runnable
                 String player = command.getUser();
                 int currDraw = command.getCurrDrawing();
 
-                int x = users.indexOf(player);
+                int x = users.indexOf(name);
                 if(x == currDraw)
                 {
-                    System.out.println(true + player + x + n);
+                    System.out.println(true + " " + name + " " + x + " " + currDraw);
                     p.updateCurrentDrawer(true);
                 }
                 else
                 {
-                    System.out.println(false + player + x + n);
+                    System.out.println(false + " " + name + " " + x + " " + currDraw);
                     p.updateCurrentDrawer(false);
                 }
 

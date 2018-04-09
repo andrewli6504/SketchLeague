@@ -66,6 +66,11 @@ public class ChatPanel extends JPanel
     private int currentlyDrawing;
     private ObjectOutputStream os;
 
+    public String getUserName()
+    {
+        return userName;
+    }
+
     public ChatPanel(String userName, ObjectOutputStream os) throws Exception
     {
         super();
