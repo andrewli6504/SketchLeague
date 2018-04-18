@@ -92,6 +92,8 @@ public class ServersListener implements Runnable
                     }
                     currentPicture = pictureList.get(currentPictureIndex);
                     System.out.println("NEXT PICTURE: "+currentPicture);
+
+                    draw.setImage(new ArrayList<>());
                 }
 
                 if(n == 1)
@@ -111,6 +113,7 @@ public class ServersListener implements Runnable
                     commandOut = new CommandFromServer(users, scores, mes, n, draw);
 
                     commandOut.setCurrDrawing(currentlyDrawing);
+                    commandOut.setImageName(currentPicture);
 
                     if(n == 3)
                         commandOut.setC(color);

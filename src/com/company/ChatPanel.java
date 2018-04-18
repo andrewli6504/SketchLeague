@@ -12,7 +12,9 @@ public class ChatPanel extends JPanel
 {
     private JButton btn_exit = new JButton("Exit");
     private JButton btn_send = new JButton("Send");
-    private JButton next_player = new JButton("Next");
+//    private JButton next_player = new JButton("Next");
+
+    private JLabel current_picture = new JLabel("Current Picture:");
 
     private JLabel lbl_users = new JLabel("Users:");
     private JList list_users = new JList();
@@ -176,8 +178,11 @@ public class ChatPanel extends JPanel
 
         btn_send.setBounds(340, 650, 130, 30);
         btn_exit.setBounds(340, 700, 130, 30);
-        next_player.setBounds(500,650,80,80);
+//        next_player.setBounds(500,650,80,80);
+        current_picture.setBounds(480,650,200,30);
 
+//        add(next_player);
+        add(current_picture);
         add(txt_message);
         add(lbl_message);
         add(lbl_users);
@@ -186,7 +191,6 @@ public class ChatPanel extends JPanel
         add(list_users);
         add(btn_send);
         add(btn_exit);
-        add(next_player);
         add(drawer);
         add(list_scores);
         add(lbl_scores);
@@ -232,16 +236,16 @@ public class ChatPanel extends JPanel
                 }
         );
 
-        next_player.addActionListener(
-                new ActionListener()
-                {
-                    @Override
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        nextPlayer();
-                    }
-                }
-        );
+//        next_player.addActionListener(
+//                new ActionListener()
+//                {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e)
+//                    {
+//                        nextPlayer();
+//                    }
+//                }
+//        );
 
         black.addActionListener(
                 new ActionListener()
@@ -715,9 +719,10 @@ public class ChatPanel extends JPanel
         else if(!message.isEmpty())
             txt_chatBox.append(user + ": " + message + "\n");
 
+        data.setMessage("");
         repaint();
     }
-
+    
     public void nextPlayer()
     {
         currentlyDrawing++;
@@ -736,13 +741,28 @@ public class ChatPanel extends JPanel
         {
             e.printStackTrace();
         }
+        data.setMessage("");
     }
 
     public void updateDrawer(int n)
     {
         System.out.println(n+"\t"+users);
         currentlyDrawing = n;
-        drawer.setText("Drawing: "+users.get(n));
+        drawer.setText("<html>Drawing:<br>"+users.get(n)+"</html>");
+        repaint();
+    }
+
+    public void updateImage(String s)
+    {
+        if(s == null)
+        {
+            current_picture.setText("Your turn to guess!");
+        }
+        else
+        {
+            current_picture.setText("<html>Current Picture:<br>"+s+"</html>");
+        }
+        repaint();
     }
 
     public void updateScores(ArrayList<Integer> scores)

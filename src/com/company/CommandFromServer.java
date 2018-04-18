@@ -14,6 +14,17 @@ public class CommandFromServer implements Serializable
     private Painting draw;
     private Color c;
     private String user;
+    private String imageName;
+
+    public String getImageName()
+    {
+        return imageName;
+    }
+
+    public void setImageName(String imageName)
+    {
+        this.imageName = imageName;
+    }
 
     public int getCurrDrawing()
     {

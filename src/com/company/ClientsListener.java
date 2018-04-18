@@ -46,17 +46,6 @@ public class ClientsListener implements Runnable
                 String player = command.getUser();
                 int currDraw = command.getCurrDrawing();
 
-                int x = users.indexOf(name);
-                if(x == currDraw)
-                {
-                    System.out.println(true + " " + name + " " + x + " " + currDraw);
-                    p.updateCurrentDrawer(true);
-                }
-                else
-                {
-                    System.out.println(false + " " + name + " " + x + " " + currDraw);
-                    p.updateCurrentDrawer(false);
-                }
 
                 if(n >= 0 && n <= 1)
                 {
@@ -73,19 +62,35 @@ public class ClientsListener implements Runnable
                 }
                 else if(n>=100)
                 {
-                    cp.updateDrawer(n-100);
                     cp.updateScores(scores);
                     cp.update(mes, player);
+                    p.updateCanvas(draw, null);
                 }
                 else if(n==99)
                 {
                     cp.updateScores(scores);
-                    p.updateCurrentDrawer(false);
                     cp.update(mes, player);
+                    p.updateCanvas(draw, null);
                 }
                 else
                 {
                     p.updateCanvas(draw, c);
+                }
+
+                int x = users.indexOf(name);
+                if(x == currDraw)
+                {
+                    System.out.println(true + " " + name + " " + x + " " + currDraw);
+                    p.updateCurrentDrawer(true);
+                    cp.updateImage(command.getImageName());
+                    cp.updateDrawer(currDraw);
+                }
+                else
+                {
+                    System.out.println(false + " " + name + " " + x + " " + currDraw);
+                    p.updateCurrentDrawer(false);
+                    cp.updateImage(null);
+                    cp.updateDrawer(currDraw);
                 }
             }
         }
