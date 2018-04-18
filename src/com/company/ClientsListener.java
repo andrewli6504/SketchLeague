@@ -80,14 +80,12 @@ public class ClientsListener implements Runnable
                 int x = users.indexOf(name);
                 if(x == currDraw)
                 {
-                    System.out.println(true + " " + name + " " + x + " " + currDraw);
                     p.updateCurrentDrawer(true);
                     cp.updateImage(command.getImageName());
                     cp.updateDrawer(currDraw);
                 }
                 else
                 {
-                    System.out.println(false + " " + name + " " + x + " " + currDraw);
                     p.updateCurrentDrawer(false);
                     cp.updateImage(null);
                     cp.updateDrawer(currDraw);

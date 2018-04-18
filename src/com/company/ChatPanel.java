@@ -706,7 +706,6 @@ public class ChatPanel extends JPanel
         }
         list_users.setListData(this.users.toArray());
         list_scores.setListData(this.scores.toArray());
-        System.out.println(this.users + " "+this.scores);
         repaint();
     }
 
@@ -746,7 +745,6 @@ public class ChatPanel extends JPanel
 
     public void updateDrawer(int n)
     {
-        System.out.println(n+"\t"+users);
         currentlyDrawing = n;
         drawer.setText("<html>Drawing:<br>"+users.get(n)+"</html>");
         repaint();

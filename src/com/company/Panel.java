@@ -102,8 +102,6 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
             ArrayList<Point> line = draw.getImage().get(a);
             g.setColor(draw.getColors().get(a));
 
-            System.out.println(line.size()+"\t"+draw.getColors().size());
-
             for (int x = 1; x < line.size(); x++)
             {
                 if(line.get(x - 1).x>130 && line.get(x).x>130)
@@ -111,10 +109,6 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
 
             }
         }
-
-        //g.drawLine((int)point1.getX(), (int)point1.getY(), (int)point2.getX(), (int)point2.getY());
-        //System.out.println(x+" "+y);
-
 
         bg.drawImage(buffer, 0, 0, null);
     }
