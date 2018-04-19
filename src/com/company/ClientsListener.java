@@ -46,7 +46,6 @@ public class ClientsListener implements Runnable
                 String player = command.getUser();
                 int currDraw = command.getCurrDrawing();
 
-
                 if(n >= 0 && n <= 1)
                 {
                     cp.update(mes, player);

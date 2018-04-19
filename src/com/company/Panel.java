@@ -71,7 +71,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
     public void updateCanvas(Painting image, Color c)
     {
         draw = image;
-        if(color != null)
+        if(c != null)
             color = c;
         repaint();
     }

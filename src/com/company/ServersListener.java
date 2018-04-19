@@ -76,13 +76,14 @@ public class ServersListener implements Runnable
 
                 if(!mes.isEmpty() && mes.toUpperCase().trim().equals(currentPicture.toUpperCase()))
                 {
+                    int index = users.indexOf(name);
+                    this.scores.set(index, scores.get(index)+100);
+                    this.scores.set(currentlyDrawing, scores.get(currentlyDrawing)+100);
+
                     currentlyDrawing++;
                     if(currentlyDrawing>=users.size())
                         currentlyDrawing -= users.size();
                     n = 100 + currentlyDrawing;
-
-                    int index = users.indexOf(name);
-                    this.scores.set(index, scores.get(index)+100);
 
                     currentPictureIndex++;
                     if(currentPictureIndex >= pictureList.size())
