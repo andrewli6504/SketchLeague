@@ -87,6 +87,12 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener
         data.setName(name);
     }
 
+    public void clear()
+    {
+        draw.clear();
+        repaint();
+    }
+
     public void paint(Graphics bg)
     {
         Graphics g2 = buffer.getGraphics();

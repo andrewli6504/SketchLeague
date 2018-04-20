@@ -63,13 +63,13 @@ public class ClientsListener implements Runnable
                 {
                     cp.updateScores(scores);
                     cp.update(mes, player);
-                    p.updateCanvas(draw, null);
+                    p.clear();
                 }
                 else if(n==99)
                 {
                     cp.updateScores(scores);
                     cp.update(mes, player);
-                    p.updateCanvas(draw, null);
+                    p.clear();
                 }
                 else
                 {
