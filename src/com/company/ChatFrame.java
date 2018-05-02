@@ -39,8 +39,9 @@ public class ChatFrame extends JFrame
             }
         });
 
-        add(cp);
         add(p);
+        add(cp);
+
         setResizable(false);
         setVisible(true);
     }
